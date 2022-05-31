@@ -1,9 +1,3 @@
-.phonebook {
-  display: grid;
-  grid-row-gap: 15px;
-  margin-left: 15px;
-}
-
 .inputForm {
   padding: 5px;
 }
@@ -18,9 +12,11 @@
   transition: 0.3s;
   margin-top: 10px;
 }
+
 .addBtn:hover {
   background-color: #b1f77c;
 }
+
 .lableName {
   display: flex;
   flex-wrap: wrap;
