@@ -1,11 +1,16 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
+import { useSelector, useDispatch } from 'react-redux';
+import action from '../../../redux/phonebook/actions';
 import styles from './ContactForm.module.css';
 
 export default function ContactForm({ onSubmit }) {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  // const [name, setName] = useState('');
+  // const [number, setNumber] = useState('');
+  const name = useSelector(state => state.form.name);
+  const number = useSelector(state => state.form.number);
+  const dispatch = useDispatch();
 
   const inputNameId = nanoid();
   const inputNumberId = nanoid();
@@ -15,11 +20,11 @@ export default function ContactForm({ onSubmit }) {
 
     switch (name) {
       case 'name':
-        setName(value);
+        dispatch(action.nameValue(value));
         break;
 
       case 'number':
-        setNumber(value);
+        dispatch(action.numberValue(value));
         break;
 
       default:
@@ -40,11 +45,11 @@ export default function ContactForm({ onSubmit }) {
   };
 
   const resetName = () => {
-    setName('');
+    dispatch(action.nameValue(''));
   };
 
   const resetNumber = () => {
-    setNumber('');
+    dispatch(action.numberValue(''));
   };
 
   return (
