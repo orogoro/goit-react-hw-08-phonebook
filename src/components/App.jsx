@@ -6,12 +6,7 @@ import Filter from './phonebook/filter/Filter';
 
 import styles from './App.module.css';
 
-const options = [
-  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-];
+import { options } from './config/data';
 
 export default function App() {
   const [contacts, setContacts] = useState(
@@ -19,26 +14,30 @@ export default function App() {
   );
   const [filter, setFilter] = useState('');
 
-  const addContact = ({ name, number }) => {
-    const findName = contacts.map(contact => contact.name).includes(name);
+  // const addContact = ({ name, number }) => {
+  //   const Name = name.toLowerCase();
 
-    if (findName) {
-      alert(`${name} is already in contacts`);
-      return;
-    }
+  //   const findName = contacts
+  //     .map(contact => contact.name.toLowerCase())
+  //     .includes(Name);
 
-    const contact = {
-      id: nanoid(),
-      name,
-      number,
-    };
+  //   if (findName) {
+  //     alert(`${Name} is already in contacts`);
+  //     return;
+  //   }
 
-    setContacts(state => [contact, ...state]);
-  };
+  //   const contact = {
+  //     id: nanoid(),
+  //     name,
+  //     number,
+  //   };
 
-  const deleteContact = id => {
-    setContacts(state => state.filter(contact => contact.id !== id));
-  };
+  //   setContacts(state => [contact, ...state]);
+  // };
+
+  // const deleteContact = id => {
+  //   setContacts(state => state.filter(contact => contact.id !== id));
+  // };
 
   const changeFilter = e => {
     setFilter(e.currentTarget.value);
@@ -48,25 +47,28 @@ export default function App() {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  const getVisibleContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
+  // const getVisibleContacts = () => {
+  //   const normalizedFilter = filter.toLowerCase();
 
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  };
+  //   return contacts.filter(contact =>
+  //     contact.name.toLowerCase().includes(normalizedFilter)
+  //   );
+  // };
 
   return (
     <div className="container">
       <section className={styles.phonebook}>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={addContact} />
+        <ContactForm />
 
         <h2>Contacts</h2>
-        <Filter value={filter} onChange={changeFilter} />
+        <Filter
+        // value={filter}
+        // onChange={changeFilter}
+        />
         <ContactList
-          contacts={getVisibleContacts()}
-          onDeleteContact={deleteContact}
+        // contacts={getVisibleContacts()}
+        // onDeleteContact={deleteContact}
         />
       </section>
     </div>

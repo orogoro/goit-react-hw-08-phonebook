@@ -1,16 +1,18 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
-import { useSelector, useDispatch } from 'react-redux';
-import action from '../../../redux/phonebook/actions';
+import { connect } from 'react-redux';
+import { addContact } from 'redux/phonebook/actions';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { nameValue, numberValue } from '../../../redux/phonebook/actions';
 import styles from './ContactForm.module.css';
 
-export default function ContactForm({ onSubmit }) {
-  // const [name, setName] = useState('');
-  // const [number, setNumber] = useState('');
-  const name = useSelector(state => state.form.name);
-  const number = useSelector(state => state.form.number);
-  const dispatch = useDispatch();
+function ContactForm({ onSubmit }) {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+  // const name = useSelector(state => state.form.name);
+  // const number = useSelector(state => state.form.number);
+  // const dispatch = useDispatch();
 
   const inputNameId = nanoid();
   const inputNumberId = nanoid();
@@ -20,11 +22,11 @@ export default function ContactForm({ onSubmit }) {
 
     switch (name) {
       case 'name':
-        dispatch(action.nameValue(value));
+        setName(value);
         break;
 
       case 'number':
-        dispatch(action.numberValue(value));
+        setNumber(value);
         break;
 
       default:
@@ -45,11 +47,11 @@ export default function ContactForm({ onSubmit }) {
   };
 
   const resetName = () => {
-    dispatch(action.nameValue(''));
+    setName('');
   };
 
   const resetNumber = () => {
-    dispatch(action.numberValue(''));
+    setNumber('');
   };
 
   return (
@@ -90,7 +92,12 @@ export default function ContactForm({ onSubmit }) {
   );
 }
 
+const mapDispatchToProps = dispatch => ({
+  onSubmit: (name, number) => dispatch(addContact(name, number)),
+});
+
+export default connect(null, mapDispatchToProps)(ContactForm);
+
 ContactForm.propTypes = {
-  name: PropTypes.string,
-  number: PropTypes.string,
+  onSubmit: PropTypes.func.isRequired,
 };

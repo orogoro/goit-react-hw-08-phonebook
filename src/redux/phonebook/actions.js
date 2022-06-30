@@ -1,17 +1,17 @@
 import { createAction } from '@reduxjs/toolkit';
-// import actionTypes from './types';
+import { nanoid } from 'nanoid';
 
-const nameValue = createAction('form/name');
-const numberValue = createAction('form/number');
+// const nameValue = createAction('form/name');
+// const numberValue = createAction('form/number');
 
-export default { nameValue, numberValue };
+const addContact = createAction('phonebook/add', ({ name, number }) => ({
+  payload: {
+    id: nanoid(),
+    name,
+    number,
+  },
+}));
+const deleteContact = createAction('phonebook/delete');
+const changeFilter = createAction('phonebook/change_filter');
 
-// export const nameValue = value => ({
-//   type: actionTypes.NAME,
-//   payload: value,
-// });
-
-// export const numberValue = value => ({
-//   type: actionTypes.NUMBER,
-//   payload: value,
-// });
+export { deleteContact, changeFilter, addContact };

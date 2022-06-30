@@ -1,12 +1,13 @@
 // import { createStore, combineReducers } from 'redux';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import { formReducer } from './reducers';
+import { phonebookReducer } from './reducers';
 
 const middleware = [...getDefaultMiddleware(), logger];
 const store = configureStore({
   reducer: {
-    form: formReducer,
+    // form: formReducer,
+    phonebook: phonebookReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',
