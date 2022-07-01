@@ -13,7 +13,18 @@ import { options } from '../../components/config/data';
 const contactsReducer = createReducer(
   JSON.parse(window.localStorage.getItem('contacts')) ?? options,
   {
-    [addContact]: (state, { payload }) => [payload, ...state],
+    [addContact]: (state, { payload }) => {
+      const lowerName = payload.name.toLowerCase();
+      const contactName = state.some(
+        contact => contact.name.toLowerCase() === lowerName
+      );
+
+      if (contactName) {
+        alert(`${lowerName} is already in contacts`);
+        return;
+      }
+      return [payload, ...state];
+    },
     [deleteContact]: (state, { payload }) =>
       state.filter(({ id }) => id !== payload),
   }

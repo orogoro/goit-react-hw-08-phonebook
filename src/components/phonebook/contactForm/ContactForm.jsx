@@ -1,18 +1,14 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addContact } from 'redux/phonebook/actions';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { nameValue, numberValue } from '../../../redux/phonebook/actions';
 import styles from './ContactForm.module.css';
 
-function ContactForm({ onSubmit }) {
+export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  // const name = useSelector(state => state.form.name);
-  // const number = useSelector(state => state.form.number);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const inputNameId = nanoid();
   const inputNumberId = nanoid();
@@ -37,10 +33,7 @@ function ContactForm({ onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    onSubmit({
-      name,
-      number,
-    });
+    dispatch(addContact({ name, number }));
 
     resetName();
     resetNumber();
@@ -92,12 +85,6 @@ function ContactForm({ onSubmit }) {
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  onSubmit: (name, number) => dispatch(addContact(name, number)),
-});
-
-export default connect(null, mapDispatchToProps)(ContactForm);
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+// ContactForm.propTypes = {
+//   onSubmit: PropTypes.func.isRequired,
+// };
