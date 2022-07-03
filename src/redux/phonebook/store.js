@@ -5,7 +5,6 @@ import { phonebookReducer } from './reducers';
 const middleware = [...getDefaultMiddleware(), logger];
 const store = configureStore({
   reducer: {
-    // form: formReducer,
     phonebook: phonebookReducer,
   },
   middleware,
