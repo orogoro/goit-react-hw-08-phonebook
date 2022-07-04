@@ -1,13 +1,13 @@
 import { useState } from 'react';
-// import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
-import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/phonebook/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { contactOperations, contactSelector } from 'redux/phonebook';
 import styles from './ContactForm.module.css';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
+  const contacts = useSelector(contactSelector.getContacts);
   const dispatch = useDispatch();
 
   const inputNameId = nanoid();
@@ -21,8 +21,8 @@ export default function ContactForm() {
         setName(value);
         break;
 
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
 
       default:
@@ -33,7 +33,16 @@ export default function ContactForm() {
   const handleSubmit = e => {
     e.preventDefault();
 
-    dispatch(addContact({ name, number }));
+    const lowerName = name.toLowerCase();
+    const contactName = contacts.some(
+      contact => contact.name.toLowerCase() === lowerName
+    );
+    if (contactName) {
+      alert(`${lowerName} is already in contacts`);
+      return;
+    }
+
+    dispatch(contactOperations.addContact({ name, phone }));
 
     resetName();
     resetNumber();
@@ -44,7 +53,7 @@ export default function ContactForm() {
   };
 
   const resetNumber = () => {
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -68,8 +77,8 @@ export default function ContactForm() {
         <input
           className={styles.inputForm}
           type="tel"
-          name="number"
-          value={number}
+          name="phone"
+          value={phone}
           onChange={handleInputChange}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"

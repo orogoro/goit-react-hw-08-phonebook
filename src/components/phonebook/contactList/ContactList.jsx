@@ -1,23 +1,26 @@
-// import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/phonebook/actions';
-import { getVisibleContacts } from 'redux/phonebook/selectors';
+import { contactSelector, contactOperations } from 'redux/phonebook';
+import { useEffect } from 'react';
 
 import styles from './ContactList.module.css';
 
 export default function ContactList() {
-  const contacts = useSelector(getVisibleContacts);
+  const contacts = useSelector(contactSelector.getVisibleContacts);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(contactOperations.fetchContacts());
+  }, [dispatch]);
 
   return (
     <ul className={styles.contactList}>
-      {contacts.map(({ id, name, number }) => (
+      {contacts?.map(({ id, name, phone }) => (
         <li className={styles.contactItem} key={id}>
-          {name}: {number}
+          {name}: {phone}
           <button
             className={styles.deleteBtn}
             type="button"
-            onClick={() => dispatch(deleteContact(id))}
+            onClick={() => dispatch(contactOperations.deleteContact(id))}
           >
             Delete
           </button>
@@ -26,14 +29,3 @@ export default function ContactList() {
     </ul>
   );
 }
-
-// ContactList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ),
-//   onDeleteContact: PropTypes.func.isRequired,
-// };
