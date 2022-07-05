@@ -14,10 +14,7 @@ export default function ContactList() {
 
   return (
     contacts.length > 0 && (
-      <ul
-        className={styles.contactList}
-        onClick={() => dispatch(contactOperations.fetchContacts())}
-      >
+      <ul className={styles.contactList}>
         {contacts.map(({ id, name, phone }) => (
           <li className={styles.contactItem} key={id}>
             {name}: {phone}
