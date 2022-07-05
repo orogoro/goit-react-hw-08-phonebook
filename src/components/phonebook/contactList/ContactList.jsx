@@ -13,19 +13,24 @@ export default function ContactList() {
   }, [dispatch]);
 
   return (
-    <ul className={styles.contactList}>
-      {contacts?.map(({ id, name, phone }) => (
-        <li className={styles.contactItem} key={id}>
-          {name}: {phone}
-          <button
-            className={styles.deleteBtn}
-            type="button"
-            onClick={() => dispatch(contactOperations.deleteContact(id))}
-          >
-            Delete
-          </button>
-        </li>
-      ))}
-    </ul>
+    contacts.length > 0 && (
+      <ul
+        className={styles.contactList}
+        onClick={() => dispatch(contactOperations.fetchContacts())}
+      >
+        {contacts.map(({ id, name, phone }) => (
+          <li className={styles.contactItem} key={id}>
+            {name}: {phone}
+            <button
+              className={styles.deleteBtn}
+              type="button"
+              onClick={() => dispatch(contactOperations.deleteContact(id))}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    )
   );
 }

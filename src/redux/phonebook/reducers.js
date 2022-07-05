@@ -8,7 +8,7 @@ const contactsReducer = createReducer([], {
     return payload;
   },
   [deleteContact.fulfilled]: (state, { payload }) => {
-    return state.filter(({ id }) => id !== payload);
+    return state.filter(({ id }) => id !== payload.id);
   },
   [addContact.fulfilled]: (state, { payload }) => {
     return [...state, payload];
@@ -21,10 +21,10 @@ const isLoading = contactsReducer(false, {
   [fetchContacts.rejected]: () => false,
 });
 
-const error = contactsReducer(null, {
-  [fetchContacts.rejected]: (_, { payload }) => payload,
-  [fetchContacts.pending]: () => null,
-});
+// const error = contactsReducer(null, {
+//   [fetchContacts.rejected]: (_, { payload }) => payload,
+//   [fetchContacts.pending]: () => null,
+// });
 
 const filterReducer = createReducer('', {
   [changeFilter]: (_, { payload }) => payload,
@@ -33,7 +33,7 @@ const filterReducer = createReducer('', {
 const phonebookReducer = combineReducers({
   contactsReducer,
   isLoading,
-  error,
+  // error,
 
   filter: filterReducer,
 });

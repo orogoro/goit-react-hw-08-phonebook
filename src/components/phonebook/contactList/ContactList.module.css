@@ -9,6 +9,8 @@
 .contactItem {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 300px;
 }
 
 .contactItem + .contactItem {
