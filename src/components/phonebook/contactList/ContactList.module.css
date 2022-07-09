@@ -18,9 +18,15 @@
 }
 
 .deleteBtn {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
   margin-left: 5px;
-  padding: 3px;
+  padding: 5px;
   border-radius: 3px;
   border: 1px solid #000;
   cursor: pointer;
+}
+.loader {
+  margin-left: 5px;
 }

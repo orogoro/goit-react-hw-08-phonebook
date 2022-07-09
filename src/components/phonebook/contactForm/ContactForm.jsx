@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
+import ClipLoader from 'react-spinners/ClipLoader';
 import { contactOperations, contactSelector } from 'redux/phonebook';
 import styles from './ContactForm.module.css';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const contacts = useSelector(contactSelector.getContacts);
+  const isLoading = useSelector(contactSelector.getLoading);
+  console.log(isLoading);
   const dispatch = useDispatch();
 
   const inputNameId = nanoid();
@@ -32,15 +34,6 @@ export default function ContactForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    const lowerName = name.toLowerCase();
-    const contactName = contacts.some(
-      contact => contact.name.toLowerCase() === lowerName
-    );
-    if (contactName) {
-      alert(`${lowerName} is already in contacts`);
-      return;
-    }
 
     dispatch(contactOperations.addContact({ name, phone }));
 
@@ -89,6 +82,12 @@ export default function ContactForm() {
 
       <button className={styles.addBtn} type="submit">
         add contact
+        <ClipLoader
+          className={styles.loader}
+          // color={color}
+          loading={isLoading}
+          size={10}
+        />
       </button>
     </form>
   );
