@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import ClipLoader from 'react-spinners/ClipLoader';
+import Notiflix from 'notiflix';
+
+import Loader from '../loader/Loader';
 import { contactOperations, contactSelector } from 'redux/phonebook';
 import styles from './ContactForm.module.css';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const contacts = useSelector(contactSelector.getContacts);
   const isLoading = useSelector(contactSelector.getLoading);
-  // console.log(isLoading);
   const dispatch = useDispatch();
 
   const inputNameId = nanoid();
@@ -35,8 +37,17 @@ export default function ContactForm() {
   const handleSubmit = e => {
     e.preventDefault();
 
-    dispatch(contactOperations.addContact({ name, phone }));
+    const lowerName = name.toLowerCase();
+    const contactName = contacts.some(
+      contact => contact.name.toLowerCase() === lowerName
+    );
 
+    if (contactName) {
+      Notiflix.Notify.failure(`${lowerName} уже есть в списке контактов`);
+      return;
+    }
+
+    dispatch(contactOperations.addContact({ name, phone }));
     resetName();
     resetNumber();
   };
@@ -56,9 +67,10 @@ export default function ContactForm() {
         <input
           className={styles.inputForm}
           type="text"
-          value={name}
-          onChange={handleInputChange}
           name="name"
+          value={name}
+          placeholder="Contact name"
+          onChange={handleInputChange}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
@@ -72,8 +84,10 @@ export default function ContactForm() {
           type="tel"
           name="phone"
           value={phone}
+          placeholder="Phone number"
           onChange={handleInputChange}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          // pattern="(\+?( |-|\.)?\d{1,w2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
           id={inputNumberId}
@@ -82,17 +96,8 @@ export default function ContactForm() {
 
       <button className={styles.addBtn} type="submit">
         Add contact
-        <ClipLoader
-          className={styles.loader}
-          // color={color}
-          loading={isLoading}
-          size={10}
-        />
+        <Loader loading={isLoading} />
       </button>
     </form>
   );
 }
-
-// ContactForm.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };

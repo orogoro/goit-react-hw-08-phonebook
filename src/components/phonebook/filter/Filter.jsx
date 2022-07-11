@@ -16,6 +16,7 @@ export default function Filter() {
         className={styled.filterValue}
         type="text"
         value={value}
+        placeholder="Find"
         onChange={e => dispatch(changeFilter(e.target.value))}
       />
     </label>

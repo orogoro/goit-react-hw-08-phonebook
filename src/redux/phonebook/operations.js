@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Notiflix from 'notiflix';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://62c2bf3d876c4700f52d250d.mockapi.io';
@@ -20,6 +21,7 @@ export const deleteContact = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const { data } = await axios.delete(`/contacts/${id}`);
+      Notiflix.Notify.success('Контакт успешно удален');
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -34,8 +36,10 @@ export const addContact = createAsyncThunk(
       name,
       phone,
     };
+
     try {
       const { data } = await axios.post('/contacts', contact);
+      Notiflix.Notify.success('Контакт успешно добавлен');
       return data;
     } catch (error) {
       return rejectWithValue(error);

@@ -3,8 +3,8 @@
   justify-content: center;
   margin-bottom: 10px;
   font-size: 35px;
-  color: #e1e2e3;
-  text-shadow: 0 3px 5px #0057d9;
+  color: #363636;
+  text-shadow: 0 3px 4px #0057d9;
 }
 
 .contact_title {
@@ -19,7 +19,7 @@
   flex-direction: column;
   grid-row-gap: 15px;
   padding: 10px 20px;
-  width: 500px;
+  width: 740px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px;

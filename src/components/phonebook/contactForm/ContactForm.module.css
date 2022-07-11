@@ -1,6 +1,6 @@
 .form {
   padding: 10px;
-  width: 250px;
+  width: 270px;
   border-radius: 5px;
   background-color: #fff;
   margin-left: auto;
@@ -49,14 +49,9 @@
   background-color: #1867de;
 }
 
-.loader {
-  margin-left: 5px;
-}
-
 .lableName {
   display: flex;
   flex-wrap: wrap;
-  /* width: 160px; */
   font-weight: 600;
 }
 

@@ -1,7 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { contactSelector, contactOperations } from 'redux/phonebook';
 import { useEffect } from 'react';
-import ClipLoader from 'react-spinners/ClipLoader';
+
+import Loader from '../loader/Loader';
+import { cross } from 'image/image';
 
 import styles from './ContactList.module.css';
 
@@ -19,19 +21,22 @@ export default function ContactList() {
       <ul className={styles.contactList}>
         {contacts.map(({ id, name, phone }) => (
           <li className={styles.contactItem} key={id}>
-            {name}: {phone}
+            <div className={styles.flex}>
+              <p className={styles.name}>{name}:</p>
+              <a href={`tel:${phone}`} className={styles.phone}>
+                {phone}
+              </a>
+            </div>
             <button
               className={styles.deleteBtn}
               type="button"
               onClick={() => dispatch(contactOperations.deleteContact(id))}
             >
-              Delete
-              <ClipLoader
-                className={styles.loader}
-                // color={color}
-                loading={isLoading}
-                size={10}
-              />
+              {isLoading ? (
+                <Loader />
+              ) : (
+                <img className={styles.cross} src={cross} width="17" alt="" />
+              )}
             </button>
           </li>
         ))}

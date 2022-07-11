@@ -1,4 +1,3 @@
-import Notiflix from 'notiflix';
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import { fetchContacts, deleteContact, addContact } from './operations';
@@ -9,28 +8,17 @@ const contactsReducer = createReducer([], {
     return payload;
   },
   [deleteContact.fulfilled]: (state, { payload }) => {
-    Notiflix.Notify.success('Контакт успешно удален');
     return state.filter(({ id }) => id !== payload.id);
   },
   [addContact.fulfilled]: (state, { payload }) => {
-    const lowerName = payload.name.toLowerCase();
-    const contactName = state.some(
-      contact => contact.name.toLowerCase() === lowerName
-    );
-    if (contactName) {
-      Notiflix.Notify.failure(`${lowerName} уже есть в списке контактов`);
-      return;
-    }
-
-    Notiflix.Notify.success('Контакт успешно добавлен');
     return [...state, payload];
   },
 });
 
 const isLoading = createReducer(false, {
-  [fetchContacts.pending]: () => true,
-  [fetchContacts.fulfilled]: () => false,
-  [fetchContacts.rejected]: () => false,
+  // [fetchContacts.pending]: () => true,
+  // [fetchContacts.fulfilled]: () => false,
+  // [fetchContacts.rejected]: () => false,
 
   [addContact.pending]: () => true,
   [addContact.fulfilled]: () => false,
