@@ -9,7 +9,7 @@ export default function ContactForm() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const isLoading = useSelector(contactSelector.getLoading);
-  console.log(isLoading);
+  // console.log(isLoading);
   const dispatch = useDispatch();
 
   const inputNameId = nanoid();
@@ -50,7 +50,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <label className={styles.lableName} htmlFor={inputNameId}>
         Name
         <input
@@ -81,7 +81,7 @@ export default function ContactForm() {
       </label>
 
       <button className={styles.addBtn} type="submit">
-        add contact
+        Add contact
         <ClipLoader
           className={styles.loader}
           // color={color}

@@ -1,0 +1,27 @@
+.title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 35px;
+  color: #e1e2e3;
+  text-shadow: 0 3px 5px #0057d9;
+}
+
+.contact_title {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  font-size: 25px;
+}
+
+.phonebook {
+  display: flex;
+  flex-direction: column;
+  grid-row-gap: 15px;
+  padding: 10px 20px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  background-color: #e3edfc;
+}

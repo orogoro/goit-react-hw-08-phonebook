@@ -1,20 +1,25 @@
-import ContactForm from './phonebook/contactForm/ContactForm';
-import ContactList from './phonebook/contactList/ContactList';
-import Filter from './phonebook/filter/Filter';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import Navigation from './phonebook/navigation/Navigation';
 
-import styles from './App.module.css';
+const HomePage = lazy(() => import('./phonebook/homePage/HomePage'));
+const Register = lazy(() => import('./phonebook/register/Register'));
+const Login = lazy(() => import('./phonebook/login/Login'));
+const Phonebook = lazy(() => import('./phonebook/Phonebook'));
 
 export default function App() {
   return (
-    <div className="container">
-      <section className={styles.phonebook}>
-        <h1>Phonebook</h1>
-        <ContactForm />
-
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
-      </section>
-    </div>
+    <>
+      <Navigation />
+      <Suspense fallback="Loading ...">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+          <Route path="contacts" element={<Phonebook />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Suspense>
+    </>
   );
 }
