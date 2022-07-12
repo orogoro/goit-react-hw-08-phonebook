@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { loginUser } from 'redux/auth';
+import { authOperations } from 'redux/auth';
 import styles from './Login.module.css';
 
 export default function Login() {
@@ -29,7 +29,7 @@ export default function Login() {
   const hanldeSubmit = e => {
     e.preventDefault();
 
-    dispatch(loginUser({ email, password }));
+    dispatch(authOperations.loginUser({ email, password }));
 
     resetForm();
   };

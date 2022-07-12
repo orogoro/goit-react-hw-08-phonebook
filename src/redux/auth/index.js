@@ -1,3 +1,2 @@
-import { loginUser, registerUser } from './auth-operations';
-
-export { loginUser, registerUser };
+export * as authSelector from './auth-selectors';
+export * as authOperations from './auth-operations';

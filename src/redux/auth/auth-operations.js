@@ -1,6 +1,6 @@
 // import Notiflix from 'notiflix';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import * as authAPI from '../../axiosAPI/authAPI';
+import { authAPI } from 'axiosAPI';
 
 const registerUser = createAsyncThunk(
   'user/registerUser',

@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-import AppBar from './appBar/AppBar';
+import AppBar from './phonebook/appBar/AppBar';
 import LoaderSuspense from './phonebook/loaderSuspense/LoaderSuspense';
 
 const HomePage = lazy(() => import('./phonebook/homePage/HomePage'));
