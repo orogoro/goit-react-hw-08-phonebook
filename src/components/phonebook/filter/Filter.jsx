@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeFilter } from 'redux/phonebook/actions';
-import { getFilter } from 'redux/phonebook/selectors';
+import { changeFilter } from 'redux/phonebook/phonebook-actions';
+import { getFilter } from 'redux/phonebook/phonebook-selectors';
 
 import styled from './Filter.module.css';
 

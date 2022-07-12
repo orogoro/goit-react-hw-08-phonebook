@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-import Navigation from './phonebook/navigation/Navigation';
+import AppBar from './appBar/AppBar';
+import LoaderSuspense from './phonebook/loaderSuspense/LoaderSuspense';
 
 const HomePage = lazy(() => import('./phonebook/homePage/HomePage'));
 const Register = lazy(() => import('./phonebook/register/Register'));
@@ -10,8 +11,8 @@ const Phonebook = lazy(() => import('./phonebook/Phonebook'));
 export default function App() {
   return (
     <>
-      <Navigation />
-      <Suspense fallback="Loading ...">
+      <AppBar />
+      <Suspense fallback={<LoaderSuspense />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="register" element={<Register />} />
