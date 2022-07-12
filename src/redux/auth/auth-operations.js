@@ -26,7 +26,18 @@ const loginUser = createAsyncThunk(
   }
 );
 
-export { registerUser, loginUser };
+const logOutUser = createAsyncThunk(
+  'user/logOutUser',
+  async (_, { rejectWithValue }) => {
+    try {
+      await authAPI.logOut();
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export { registerUser, loginUser, logOutUser };
 
 // export const deleteContact = createAsyncThunk(
 //   'user/contactDelete',

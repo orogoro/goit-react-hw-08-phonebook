@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
-import { registerUser, loginUser } from './auth-operations';
+import { registerUser, loginUser, logOutUser } from './auth-operations';
 
 const initialUserState = {
   name: null,
@@ -14,6 +14,9 @@ const user = createReducer(initialUserState, {
   [loginUser.fulfilled]: (_, { payload }) => {
     return payload.user;
   },
+  [logOutUser.fulfilled]: () => {
+    return initialUserState;
+  },
 });
 
 const token = createReducer(null, {
@@ -23,11 +26,15 @@ const token = createReducer(null, {
   [loginUser.fulfilled]: (_, { payload }) => {
     return payload.token;
   },
+  [logOutUser.fulfilled]: () => {
+    return null;
+  },
 });
 
 const isLoggedIn = createReducer(false, {
   [registerUser.fulfilled]: () => true,
   [loginUser.fulfilled]: () => true,
+  [logOutUser.fulfilled]: () => false,
 });
 
 // const error = createReducer(null, {

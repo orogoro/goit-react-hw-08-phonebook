@@ -2,7 +2,7 @@ import axios from 'axios';
 import Notiflix from 'notiflix';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://62c2bf3d876c4700f52d250d.mockapi.io';
+// axios.defaults.baseURL = 'https://62c2bf3d876c4700f52d250d.mockapi.io';
 // axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 export const fetchContacts = createAsyncThunk(
