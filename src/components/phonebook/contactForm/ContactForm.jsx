@@ -9,7 +9,7 @@ import styles from './ContactForm.module.css';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
   const contacts = useSelector(contactSelector.getContacts);
   const isLoading = useSelector(contactSelector.getLoading);
   const dispatch = useDispatch();
@@ -25,8 +25,8 @@ export default function ContactForm() {
         setName(value);
         break;
 
-      case 'phone':
-        setPhone(value);
+      case 'number':
+        setNumber(value);
         break;
 
       default:
@@ -47,7 +47,7 @@ export default function ContactForm() {
       return;
     }
 
-    dispatch(contactOperations.addContact({ name, phone }));
+    dispatch(contactOperations.addContact({ name, number }));
     resetName();
     resetNumber();
   };
@@ -57,7 +57,7 @@ export default function ContactForm() {
   };
 
   const resetNumber = () => {
-    setPhone('');
+    setNumber('');
   };
 
   return (
@@ -82,8 +82,8 @@ export default function ContactForm() {
         <input
           className={styles.inputForm}
           type="tel"
-          name="phone"
-          value={phone}
+          name="number"
+          value={number}
           placeholder="Phone number"
           onChange={handleInputChange}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"

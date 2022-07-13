@@ -19,12 +19,12 @@ export default function ContactList() {
   return (
     contacts.length > 0 && (
       <ul className={styles.contactList}>
-        {contacts.map(({ id, name, phone }) => (
+        {contacts.map(({ id, name, number }) => (
           <li className={styles.contactItem} key={id}>
             <div className={styles.flex}>
               <p className={styles.name}>{name}:</p>
-              <a href={`tel:${phone}`} className={styles.phone}>
-                {phone}
+              <a href={`tel:${number}`} className={styles.phone}>
+                {number}
               </a>
             </div>
             <button

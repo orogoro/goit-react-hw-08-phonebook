@@ -37,7 +37,26 @@ const logOutUser = createAsyncThunk(
   }
 );
 
-export { registerUser, loginUser, logOutUser };
+const fetchCurrentUser = createAsyncThunk(
+  'user/refresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue();
+    }
+
+    try {
+      const response = await authAPI.currentUser(persistedToken);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export { registerUser, loginUser, logOutUser, fetchCurrentUser };
 
 // export const deleteContact = createAsyncThunk(
 //   'user/contactDelete',

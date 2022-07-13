@@ -1,16 +1,13 @@
-import axios from 'axios';
 import Notiflix from 'notiflix';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-// axios.defaults.baseURL = 'https://62c2bf3d876c4700f52d250d.mockapi.io';
-// axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+import { contactsAPI } from 'axiosAPI';
 
 export const fetchContacts = createAsyncThunk(
   'contact/fechContact',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get('/contacts');
-      return data;
+      const response = await contactsAPI.contacts();
+      return response;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -21,9 +18,9 @@ export const deleteContact = createAsyncThunk(
   'contact/contactDelete',
   async (id, { rejectWithValue }) => {
     try {
-      const { data } = await axios.delete(`/contacts/${id}`);
+      await contactsAPI.deleteContact(id);
       Notiflix.Notify.success('Контакт успешно удален');
-      return data;
+      return id;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -32,28 +29,18 @@ export const deleteContact = createAsyncThunk(
 
 export const addContact = createAsyncThunk(
   'contact/contactAdd',
-  async ({ name, phone }, { rejectWithValue }) => {
+  async ({ name, number }, { rejectWithValue }) => {
     const contact = {
       name,
-      phone,
+      number,
     };
 
     try {
-      const { data } = await axios.post('/contacts', contact);
+      const response = await contactsAPI.createContact(contact);
       Notiflix.Notify.success('Контакт успешно добавлен');
-      return data;
+      return response;
     } catch (error) {
       return rejectWithValue(error);
     }
   }
 );
-
-// export const fetchContacts = () => async dispatch => {
-//   dispatch(fetchContactRequest());
-//   try {
-//     const { data } = await axios.get('/contacts');
-//     dispatch(fetchContactSuccess(data));
-//   } catch (error) {
-//     dispatch(fetchContactError(error));
-//   }
-// };
