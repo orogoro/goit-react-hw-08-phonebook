@@ -1,0 +1,26 @@
+.main {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.container_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.p {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.span {
+  color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(
+    90deg,
+    rgba(62, 53, 228, 0.718) 0%,
+    rgb(127, 216, 253) 47%,
+    rgb(39, 143, 253) 94%
+  );
+}
