@@ -46,6 +46,12 @@ const isLoggedIn = createReducer(false, {
   [fetchCurrentUser.fulfilled]: () => true,
 });
 
+const сurrentUser = createReducer(false, {
+  [fetchCurrentUser.pending]: () => true,
+  [fetchCurrentUser.fulfilled]: () => false,
+  [fetchCurrentUser.rejected]: () => false,
+});
+
 // const error = createReducer(null, {
 //   [fetchContacts.rejected]: (_, { payload }) => payload,
 //   [fetchContacts.pending]: () => null,
@@ -55,6 +61,7 @@ const authReducer = combineReducers({
   user,
   token,
   isLoggedIn,
+  сurrentUser,
 });
 
 export { authReducer };
