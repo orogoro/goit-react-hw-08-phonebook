@@ -1,5 +1,6 @@
 .main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin-top: 20px;
 }
@@ -9,6 +10,60 @@
   flex-direction: column;
   align-items: center;
 }
+
+.container_img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.img {
+  /* background-image: url(../../image/premium-icon-contacts.png); */
+  margin: 0 30px;
+}
+
+.container_button {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 28px;
+  padding: 5px;
+  font-weight: 700;
+  font-size: 17px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+
+  color: #fff;
+  background-color: #3b7bdb;
+  border-radius: 4px;
+  border: 0 solid transparent;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 15%);
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #1867de;
+}
+
+.text {
+  font-weight: 500;
+  color: #555657;
+}
+
 .p {
   margin-top: 10px;
   font-size: 20px;

@@ -3,7 +3,7 @@ import { contactSelector, contactOperations } from 'redux/phonebook';
 import { useEffect } from 'react';
 
 import Loader from '../loader/Loader';
-import { cross } from 'image/image';
+import cross from 'image/cross.png';
 
 import styles from './ContactList.module.css';
 

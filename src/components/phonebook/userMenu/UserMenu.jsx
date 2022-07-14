@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { avatar } from '../../../image/image';
+import avatar from '../../../image/user.png';
 import { authSelector, authOperations } from 'redux/auth';
 import styles from './UserMenu.module.css';
 
