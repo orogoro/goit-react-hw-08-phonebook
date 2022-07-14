@@ -4,13 +4,14 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { authOperations } from '../redux/auth';
-import AppBar from './phonebook/appBar/AppBar';
-import LoaderSuspense from './phonebook/loaderSuspense/LoaderSuspense';
+import { AppBar, LoaderSuspense, PrivateRoute, PublicRoute } from './phonebook';
 
-const HomePage = lazy(() => import('./phonebook/homePage/HomePage'));
-const Register = lazy(() => import('./phonebook/register/Register'));
-const Login = lazy(() => import('./phonebook/login/Login'));
-const Phonebook = lazy(() => import('./phonebook/Phonebook'));
+const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
+const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const PhonebookPage = lazy(() =>
+  import('../pages/PhonebookPage/PhonebookPage')
+);
 
 export default function App() {
   const dispatch = useDispatch();
@@ -24,10 +25,39 @@ export default function App() {
       <AppBar />
       <Suspense fallback={<LoaderSuspense />}>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="register" element={<Register />} />
-          <Route path="login" element={<Login />} />
-          <Route path="contacts" element={<Phonebook />} />
+          <Route
+            path="/"
+            element={
+              <PublicRoute>
+                <HomePage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <PublicRoute path="/contacts" restricted>
+                <RegisterPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="login"
+            element={
+              <PublicRoute path="/contacts" restricted>
+                <LoginPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="contacts"
+            element={
+              <PrivateRoute path="/login">
+                <PhonebookPage />
+              </PrivateRoute>
+            }
+          />
+
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>

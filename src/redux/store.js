@@ -21,13 +21,6 @@ const persistConfig = {
   whitelist: ['token'],
 };
 
-// middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware({
-//       serializableCheck: {
-//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//       },
-//     }), logger
-
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {

@@ -1,8 +1,12 @@
-import { ContactForm, ContactList, Filter } from './index';
+import {
+  ContactForm,
+  ContactList,
+  Filter,
+} from '../../components/phonebook/index';
 
-import styles from './Phonebook.module.css';
+import styles from './PhonebookPage.module.css';
 
-export default function Phonebook() {
+export default function PhonebookPage() {
   return (
     <div className="container">
       <section className={styles.phonebook}>

@@ -1,4 +1,3 @@
-// import Notiflix from 'notiflix';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { authAPI } from 'axiosAPI';
 
@@ -57,34 +56,3 @@ const fetchCurrentUser = createAsyncThunk(
 );
 
 export { registerUser, loginUser, logOutUser, fetchCurrentUser };
-
-// export const deleteContact = createAsyncThunk(
-//   'user/contactDelete',
-//   async (id, { rejectWithValue }) => {
-//     try {
-//       const { data } = await axios.delete(`/contacts/${id}`);
-//       Notiflix.Notify.success('Контакт успешно удален');
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error);
-//     }
-//   }
-// );
-
-// export const addContact = createAsyncThunk(
-//   'user/contactAdd',
-//   async ({ name, phone }, { rejectWithValue }) => {
-//     const contact = {
-//       name,
-//       phone,
-//     };
-
-//     try {
-//       const { data } = await axios.post('/contacts', contact);
-//       Notiflix.Notify.success('Контакт успешно добавлен');
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error);
-//     }
-//   }
-// );
