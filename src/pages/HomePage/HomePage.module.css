@@ -285,7 +285,7 @@
   animation: rotateShadow 15s infinite cubic-bezier(1, -0.75, 0.5, 1.2);
 }
 
-/* @keyframes rotateShadow {
+@keyframes rotateShadow {
   0%,
   10% {
     transform: rotateY(0deg) rotateX(90deg);
@@ -336,4 +336,4 @@
     opacity: 0.95;
     filter: alpha(opacity=95);
   }
-} */
+}
