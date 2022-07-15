@@ -51,30 +51,3 @@ const phonebookReducer = combineReducers({
 });
 
 export { phonebookReducer };
-
-// const contactsReducer = createReducer(
-//   JSON.parse(window.localStorage.getItem('contacts')) ?? options,
-//   {
-//     [addContact]: (state, { payload }) => {
-//       const lowerName = payload.name.toLowerCase();
-//       const contactName = state.some(
-//         contact => contact.name.toLowerCase() === lowerName
-//       );
-
-//       if (contactName) {
-//         alert(`${lowerName} is already in contacts`);
-//         return;
-//       }
-//       window.localStorage.setItem(
-//         'contacts',
-//         JSON.stringify([payload, ...state])
-//       );
-//       return [payload, ...state];
-//     },
-//     [deleteContact]: (state, { payload }) => {
-//       const stateFilter = state.filter(({ id }) => id !== payload);
-//       window.localStorage.setItem('contacts', JSON.stringify(stateFilter));
-//       return stateFilter;
-//     },
-//   }
-// );
