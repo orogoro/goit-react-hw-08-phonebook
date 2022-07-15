@@ -1,9 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import contactbook_img from '../../image/icon-contact.png';
-import contactbook_img2 from '../../image/premium-icon-contacts.png';
-import contactbook_img3 from '../../image/premium-icon.png';
-
 import styles from './HomePage.module.css';
 
 export default function HomePage() {
@@ -16,7 +12,26 @@ export default function HomePage() {
         <p className={styles.p}>Next generation</p>
       </div>
       <div className={styles.container_img}>
-        <img
+        <div className={styles.slider}>
+          <div className={styles.container}>
+            <div className={styles.slide + ' ' + styles.x}></div>
+            <div className={styles.slide + ' ' + styles.y}></div>
+            <div className={styles.slide + ' ' + styles.z}></div>
+          </div>
+          <div className={styles.shadow}></div>
+        </div>
+      </div>
+      <div className={styles.container_button}>
+        <p className={styles.text}>Fast and Secure React Application</p>
+        <Link to="/contacts" className={styles.button} type="button">
+          Try it now
+        </Link>
+      </div>
+    </main>
+  );
+}
+
+/* <img
           className={styles.img}
           src={contactbook_img}
           alt="bookContacts"
@@ -35,14 +50,4 @@ export default function HomePage() {
           alt="bookContacts"
           width="150"
           height="150"
-        />
-      </div>
-      <div className={styles.container_button}>
-        <p className={styles.text}>Fast and Secure React Application</p>
-        <Link to="/contacts" className={styles.button} type="button">
-          Try it now
-        </Link>
-      </div>
-    </main>
-  );
-}
+        /> */
