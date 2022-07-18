@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import Notiflix from 'notiflix';
 import { authAPI } from 'axiosAPI';
 
 const registerUser = createAsyncThunk(
@@ -6,6 +7,10 @@ const registerUser = createAsyncThunk(
   async (userDate, { rejectWithValue }) => {
     try {
       const response = await authAPI.register(userDate);
+      if (!response) {
+        Notiflix.Notify.failure('Такой пользователь уже есть');
+        return rejectWithValue(response);
+      }
       return response;
     } catch (error) {
       return rejectWithValue(error);
@@ -18,6 +23,10 @@ const loginUser = createAsyncThunk(
   async (userDate, { rejectWithValue }) => {
     try {
       const response = await authAPI.login(userDate);
+      if (!response) {
+        Notiflix.Notify.failure('Такого пользователя нет');
+        return rejectWithValue(response);
+      }
       return response;
     } catch (error) {
       return rejectWithValue(error);

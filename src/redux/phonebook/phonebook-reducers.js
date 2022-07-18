@@ -19,15 +19,13 @@ const contactsReducer = createReducer([], {
   },
 });
 
-const isLoading = createReducer(false, {
-  // [fetchContacts.pending]: () => true,
-  // [fetchContacts.fulfilled]: () => false,
-  // [fetchContacts.rejected]: () => false,
-
+const isLoadingAdd = createReducer(false, {
   [addContact.pending]: () => true,
   [addContact.fulfilled]: () => false,
   [addContact.rejected]: () => false,
+});
 
+const isLoadingDelete = createReducer(false, {
   [deleteContact.pending]: () => true,
   [deleteContact.fulfilled]: () => false,
   [deleteContact.rejected]: () => false,
@@ -44,7 +42,8 @@ const filterReducer = createReducer('', {
 
 const phonebookReducer = combineReducers({
   contactsReducer,
-  isLoading,
+  isLoadingAdd,
+  isLoadingDelete,
   error,
 
   filter: filterReducer,

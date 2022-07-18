@@ -1,6 +1,7 @@
 export const getContacts = state => state.phonebook.contactsReducer;
 export const getFilter = state => state.phonebook.filter;
-export const getLoading = state => state.phonebook.isLoading;
+export const getLoadingAdd = state => state.phonebook.isLoadingAdd;
+export const getLoadingDelete = state => state.phonebook.isLoadingDelete;
 
 export const getVisibleContacts = state => {
   const contacts = getContacts(state);

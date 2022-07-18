@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { authOperations } from 'redux/auth';
+import Loader from '../loader/Loader';
+import { authOperations, authSelector } from 'redux/auth';
 import styles from './Register.module.css';
 
 export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const loader = useSelector(authSelector.getLoader);
   const dispatch = useDispatch();
 
   const hanldeChange = e => {
@@ -35,10 +37,6 @@ export default function Register() {
     e.preventDefault();
 
     dispatch(authOperations.registerUser({ name, email, password }));
-
-    setName('');
-    setEmail('');
-    setPassword('');
   };
 
   return (
@@ -93,6 +91,7 @@ export default function Register() {
         <div className={styles.container}>
           <button type="submit" className={styles.button}>
             Create account
+            <Loader loading={loader} />
           </button>
         </div>
       </form>

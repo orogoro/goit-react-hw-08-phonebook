@@ -9,7 +9,7 @@ import styles from './ContactList.module.css';
 
 export default function ContactList() {
   const contacts = useSelector(contactSelector.getVisibleContacts);
-  const isLoading = useSelector(contactSelector.getLoading);
+  const isLoading = useSelector(contactSelector.getLoadingDelete);
   const dispatch = useDispatch();
 
   useEffect(() => {

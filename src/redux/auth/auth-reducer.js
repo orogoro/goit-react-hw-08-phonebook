@@ -52,16 +52,22 @@ const сurrentUser = createReducer(false, {
   [fetchCurrentUser.rejected]: () => false,
 });
 
-// const error = createReducer(null, {
-//   [fetchContacts.rejected]: (_, { payload }) => payload,
-//   [fetchContacts.pending]: () => null,
-// });
+const loader = createReducer(false, {
+  [loginUser.pending]: () => true,
+  [loginUser.fulfilled]: () => false,
+  [loginUser.rejected]: () => false,
+
+  [registerUser.pending]: () => true,
+  [registerUser.fulfilled]: () => false,
+  [registerUser.rejected]: () => false,
+});
 
 const authReducer = combineReducers({
   user,
   token,
   isLoggedIn,
   сurrentUser,
+  loader,
 });
 
 export { authReducer };

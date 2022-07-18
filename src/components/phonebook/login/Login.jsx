@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { authOperations } from 'redux/auth';
+import { authOperations, authSelector } from 'redux/auth';
+import Loader from '../loader/Loader';
 import styles from './Login.module.css';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const loader = useSelector(authSelector.getLoader);
   const dispatch = useDispatch();
 
   const hanldeChange = e => {
@@ -30,13 +32,6 @@ export default function Login() {
     e.preventDefault();
 
     dispatch(authOperations.loginUser({ email, password }));
-
-    resetForm();
-  };
-
-  const resetForm = () => {
-    setEmail('');
-    setPassword('');
   };
 
   return (
@@ -75,6 +70,7 @@ export default function Login() {
         <div className={styles.container}>
           <button type="submit" className={styles.button}>
             Log in
+            <Loader loading={loader} />
           </button>
         </div>
       </form>

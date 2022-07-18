@@ -11,7 +11,7 @@ export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const contacts = useSelector(contactSelector.getContacts);
-  const isLoading = useSelector(contactSelector.getLoading);
+  const isLoading = useSelector(contactSelector.getLoadingAdd);
   const dispatch = useDispatch();
 
   const inputNameId = nanoid();
@@ -36,7 +36,6 @@ export default function ContactForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-
     const lowerName = name.toLowerCase();
     const contactName = contacts.some(
       contact => contact.name.toLowerCase() === lowerName
